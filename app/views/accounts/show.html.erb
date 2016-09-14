@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @account.name %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @account.balance %>
+</p>
+
+<p>
+  <strong>Transfer Funds:</strong>
+  <%= form_tag account_transfer_funds_path(@account) do %>
+    <%= label_tag :sent_to %>
+    <%= select_tag :recipent_id, options_from_collection_for_select(Account.all, "id", "name") %>
+
+    <%= label_tag :amount %>
+    <%= number_field_tag :amount %>
+    
+    <%= submit_tag :transfer %>
+  <% end %>
+</p>
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
