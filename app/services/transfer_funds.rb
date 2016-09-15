@@ -15,15 +15,15 @@ class TransferFunds
   def call
     return false if insufficient_funds
 
-    @from_account.balance -= amount
-    @to_account.balance += amount
+    from_account.balance -= amount
+    to_account.balance += amount
 
-    @from_account.save
-    @to_account.save
+    from_account.save
+    to_account.save
     return true
   end
 
   def insufficient_funds
-    @from_account.balance < amount
+    from_account.balance < amount
   end
 end
