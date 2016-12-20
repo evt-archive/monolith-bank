@@ -1,3 +1,6 @@
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -18,9 +21,34 @@
 
     <%= label_tag :amount %>
     <%= number_field_tag :amount %>
-    
+
+    <%= label_tag :memo %>
+    <%= text_field_tag :memo %>
+
     <%= submit_tag :transfer %>
   <% end %>
 </p>
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+
+<hr/>
+<p>
+  <strong>Past Transfers:</strong>
+</p>
+
+<table>
+  <thead>
+    <th>To</th>
+    <th>Memo</th>
+    <th>Date</th>
+    <th>Amount</th>
+  </thead>
+  <tbody>
+    <% @account.funds_transfers.each do |funds_transfer| %>
+      <tr>
+        <td><%= funds_transfer.to.name %></td>
+        <td><%= funds_transfer.memo %></td>
+        <td><%= funds_transfer.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= funds_transfer.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
